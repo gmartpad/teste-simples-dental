@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import { Link } from 'react-router-dom';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -18,6 +20,10 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
+  headerTitleText: {
+    textDecoration: 'none',
+    color: '#fff',
+  }
 }));
 
 const Header = () => {
@@ -35,7 +41,12 @@ const Header = () => {
             variant="h6" 
             color="inherit"
           >
-            Teste - Simples Dental
+            <Link 
+              className={classes.headerTitleText}
+              to={{pathname: '/'}}
+            >
+              Teste - Simples Dental
+            </Link>
           </Typography>
         </Toolbar>
       </AppBar>

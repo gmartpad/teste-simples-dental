@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 
 import { useSelector } from 'react-redux';
 
@@ -15,6 +16,20 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 300,
         width: '100%',
         padding: '26px',
+        marginTop: '48px',
+    },
+    albumTitle: {
+        textAlign: 'center',
+        fontSize: '5vw',
+        [theme.breakpoints.down('600')]: {
+            fontSize: '7vw',
+        }
+    },
+    imageBodySpan: {
+        width: '100%',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
         marginTop: '48px',
     },
     imageBox: {
@@ -38,12 +53,21 @@ const SingleAlbum = props => {
 
     //-----------------------------------------------------------
 
-    const currentAlbum = useSelector(state => state.albums.currentAlbum);
+    const albums = useSelector(state => state.albums.albums);
     const photos = useSelector(state => state.photos.photos);
+    const currentAlbum = useSelector(state => state.albums.currentAlbum);
 
     //-----------------------------------------------------------
 
-    const [tenPhotos, setTenPhotos] = useState(photos.slice([0], [10]));
+    const currentAlbumObject = albums.filter(function (el) {
+        return el.id === currentAlbum;
+    })
+
+    const currentPhotos = photos.filter(function (el) { 
+        return el.albumId === currentAlbum; 
+    })
+
+    const [tenPhotos, setTenPhotos] = useState(currentPhotos.slice([0], [10]));
 
     const classes = useStyles();
 
@@ -52,6 +76,17 @@ const SingleAlbum = props => {
             maxWidth="md"
             className={classes.root}
         >
+            <Typography
+                className={classes.albumTitle}
+                variant="h2" 
+                color="inherit"
+            >
+                {currentAlbumObject[0].title}
+            </Typography>
+            <Box
+                component="span"
+                className={classes.imageBodySpan}
+            >
             {
                 tenPhotos.map((i, k) =>
                     <Box
@@ -64,14 +99,8 @@ const SingleAlbum = props => {
                         />
                     </Box>
                 )
-
             }
-            {/* <Typography>
-                SingleAlbum - {currentAlbum}
-            </Typography>
-            <Typography>
-                {JSON.stringify(photos)}
-            </Typography> */}
+            </Box>
 
         </Container>
     )

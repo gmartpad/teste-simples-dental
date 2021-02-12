@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import AlbumsAPI from '../../helpers/AlbumsAPI';
 import PhotosAPI from '../../helpers/PhotosAPI';
 
-import { SET_CURRENT_ALBUM, SET_PHOTOS } from '../../actions/actionTypes';
+import { SET_ALBUMS, SET_PHOTOS, SET_CURRENT_ALBUM } from '../../actions/actionTypes';
 
 import { useDispatch } from 'react-redux';
 
@@ -78,10 +78,10 @@ const Home = () => {
 
     // dispatcher
 
-    const setCurrentAlbum = (currentAlbum) => dispatch({
-        type: SET_CURRENT_ALBUM,
+    const setAlbumsDispatcher = (albums) => dispatch({
+        type: SET_ALBUMS,
         payload: {
-            currentAlbum
+            albums
         }
     })
 
@@ -89,6 +89,13 @@ const Home = () => {
         type: SET_PHOTOS,
         payload: {
             photos
+        }
+    })
+
+    const setCurrentAlbum = (currentAlbum) => dispatch({
+        type: SET_CURRENT_ALBUM,
+        payload: {
+            currentAlbum
         }
     })
 
@@ -130,6 +137,7 @@ const Home = () => {
         getAlbums();
         getPhotos();
         allocateThumbnails();
+        setAlbumsDispatcher(albums);
         setPhotosDispatcher(photos);
     }, [photos])
 
