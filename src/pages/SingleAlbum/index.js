@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'block',
         width: '100%',
         height: 'auto',
+        borderRadius: '5px',
     }
 }))
 

@@ -165,9 +165,9 @@ const Home = () => {
                                 <CardMedia
                                     component="img"
                                     className={classes.albumButtonMedia}
-                                    alt={thumbnails[k] ? thumbnails[k].thumbnailUrl : null}
-                                    image={thumbnails[k] ? thumbnails[k].thumbnailUrl : null}
-                                    title={thumbnails[k] ? thumbnails[k].thumbnailUrl : null}
+                                    alt={thumbnails[k] ? thumbnails[k].url : null}
+                                    image={thumbnails[k] ? thumbnails[k].url : null}
+                                    title={thumbnails[k] ? thumbnails[k].url : null}
                                 />
                                 <CardContent
                                     className={classes.albumButtonContent}
