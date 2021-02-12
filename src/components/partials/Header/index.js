@@ -10,6 +10,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  headerTitle: {
+    [theme.breakpoints.down('xs')]: {
+      margin: '0 auto'
+    }
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -20,13 +25,17 @@ const Header = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="sticky">
+      <AppBar position="fixed">
         <Toolbar variant="dense">
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" color="inherit">
-            Home
+          </IconButton> */}
+          <Typography 
+            className={classes.headerTitle}
+            variant="h6" 
+            color="inherit"
+          >
+            Teste - Simples Dental
           </Typography>
         </Toolbar>
       </AppBar>

@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import AlbumsAPI from '../../helpers/AlbumsAPI';
 import PhotosAPI from '../../helpers/PhotosAPI';
 
-import { SET_CURRENT_ALBUM, SET_PHOTOS } from '../../constants/ActionTypes';
+import { SET_CURRENT_ALBUM, SET_PHOTOS } from '../../actions/actionTypes';
 
 import { useDispatch } from 'react-redux';
 
@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 300,
         width: '100%',
         padding: '26px',
+        marginTop: '48px',
     },
     albumButton: {
         display: 'flex',
@@ -61,6 +62,11 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'start',
+    },
+    albumButtonMedia: {
+        display: 'block',
+        width: '100%',
+        height: 'auto',
     }
 }))
 
@@ -79,7 +85,7 @@ const Home = () => {
         }
     })
 
-    const setPhotos = (photos) => dispatch({
+    const setPhotosDispatcher = (photos) => dispatch({
         type: SET_PHOTOS,
         payload: {
             photos
@@ -124,7 +130,7 @@ const Home = () => {
         getAlbums();
         getPhotos();
         allocateThumbnails();
-        setPhotos(photos);
+        setPhotosDispatcher(photos);
     }, [photos])
 
     const classes = useStyles();
@@ -138,7 +144,8 @@ const Home = () => {
                 albums.map((i, k) => 
                     <Card 
                         className={classes.albumButton}
-                        onClick={setCurrentAlbum(k+1)}
+                        onClick={() => setCurrentAlbum(k+1)}
+                        key={k}
                     >
                         <Link 
                             className={classes.albumButtonLink}
@@ -149,8 +156,8 @@ const Home = () => {
                             >
                                 <CardMedia
                                     component="img"
+                                    className={classes.albumButtonMedia}
                                     alt={thumbnails[k] ? thumbnails[k].thumbnailUrl : null}
-                                    height="150"
                                     image={thumbnails[k] ? thumbnails[k].thumbnailUrl : null}
                                     title={thumbnails[k] ? thumbnails[k].thumbnailUrl : null}
                                 />
